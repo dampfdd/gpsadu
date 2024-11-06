@@ -1,0 +1,84 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>간단한 지도 표시하기</title>
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=iwa15z0jjx"></script>
+    
+    <script>
+        var map;
+        var marker;
+  
+        // 초기 지도 설정 함수
+        function initMap() {
+          map = new naver.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: { lat: 0, lng: 0 }
+          });
+        }
+
+        // Naver Map 초기화 및 마커 설정 함수
+        function initMap() {
+            var mapOptions = {
+                center: new naver.maps.LatLng(36.7696021666666, 126.9334815), // 서울 시청 좌표
+                zoom: 15
+            };
+
+            // 지도 생성
+            var map = new naver.maps.Map('map', mapOptions);
+
+            // 마커 생성
+            var marker = new naver.maps.Marker({
+                position: markerPosition, // 마커 위치
+                map: map,                 // 마커가 표시될 지도
+                title: '내위치'        // 마커에 마우스를 올렸을 때 표시될 타이틀
+            });
+        }
+  
+      // 지도 및 마커 로드
+        window.onload = function () {
+            initMap();
+        };
+  
+             
+        
+  
+        // 스피커 소리 재생 요청 함수
+        function playSound() {
+          fetch('/play-sound')  // 서버에 스피커 재생 명령
+            .then(response => response.text())
+            .then(data => {
+              alert(data);  // 서버로부터 메시지 수신 후 알림 표시
+            });
+        }
+      </script>
+</head>
+<body>
+    <h3>GPS 및 스피커 제어</h3>
+<div id="map" style="height: 600px; width: 100%;"></div>
+ <!-- GPS 좌표 갱신 버튼 -->
+ <button onclick="updateGPS()" style="width: 50%; padding: 15px; font-size: 18px; margin-top: 10px;">
+    GPS 좌표 갱신
+  </button>
+    <!-- 스피커 소리 재생 버튼 -->
+    <button onclick="playSound()" style="width: 50%; padding: 15px; font-size: 18px; margin-top: 10px;">
+        스피커에서 소리 재생
+      </button>
+<script>
+   // 서버로부터 받은 GPS 좌표
+   var latitude = 36.7696021666666; // 서버에서 받아온 위도
+    var longitude = 126.9334815; // 서버에서 받아온 경도
+
+var mapOptions = {
+    center: new naver.maps.LatLng(latitude, longitude),
+    zoom: 10
+};
+
+var map = new naver.maps.Map('map', mapOptions);
+</script>
+<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=iwa15z0jjx"></script>
+</body>
+
+</html>
