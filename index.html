@@ -64,6 +64,7 @@
                 await characteristic.startNotifications();
                 console.log('GPS 데이터 수신을 위한 알림 설정 완료');
             } catch (error) {
+                alert('Bluetooth 연결에 실패했습니다: ' + error.message);
                 console.error('Bluetooth 연결 실패:', error);
             }
         }
@@ -125,7 +126,6 @@
       소리 멈춤
   </button>
 
-<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=iwa15z0jjx"></script>
 </body>
 
 </html>
